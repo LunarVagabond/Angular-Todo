@@ -20,10 +20,10 @@ const addTodo = (req, res) => {
   const { title, description } = req.body;
   let sql = "";
   if (description == "" || description == null) {
-    sql = `INSERT INTO todo (title) VALUES('${title}')`;
+    sql = `INSERT INTO todo (title) VALUES('${title}') RETURNING *`;
   }
   else {
-    sql = `INSERT INTO todo (title, description) VALUES ('${title}', '${description}')`;
+    sql = `INSERT INTO todo (title, description) VALUES ('${title}', '${description}') RETURNING *`;
   }
 
 
@@ -31,7 +31,7 @@ const addTodo = (req, res) => {
     if (error) {
       throw error
     }
-    res.status(201).send(`Todo added with ID: ${result.insertId}`)
+    res.status(201).json(result.rows[0])
   })
 }
 const removeTodo = (req, res) => {
@@ -41,7 +41,7 @@ const removeTodo = (req, res) => {
     if (error) {
       throw error
     }
-    res.status(200).send(`Todo deleted with ID: ${id}`)
+    res.status(200).json({status:"ok"})
   })
 
 }
@@ -53,7 +53,7 @@ const updateStatus = (req, res) => {
     if (error) {
       throw error
     }
-    res.status(200).send(`Todo modified with ID: ${id}`)
+    res.status(200).json({status:"ok"})
   }
   )
 }

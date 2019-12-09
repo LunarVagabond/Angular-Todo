@@ -21,7 +21,6 @@ export class AddTodoComponent implements OnInit {
       title: this.title,
       completed: false
     }
-
     this.addTodo.emit(todo); // propagate to parent object
     this.title = null;
   }
