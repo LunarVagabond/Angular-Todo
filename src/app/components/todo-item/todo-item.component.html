@@ -1,6 +1,9 @@
 <div [ngClass]="setClass()">
     <p>
-        <input (change)="onToggle(todo)" type="checkbox" />{{ todo.title }}
+        <input (change)="onToggle(todo)" type="checkbox" id="{{ todo.todo_id }}" [checked]="todo.completed"/>
+        <label for="{{ todo.todo_id }}">
+            {{ todo.title }}
+          </label>
         <button (click)="onDelete(todo)" class="del" >x</button>
     </p>
     <!-- add rest of the todo item here and create card-->

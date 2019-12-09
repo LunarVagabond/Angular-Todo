@@ -23,6 +23,7 @@ export class AddTodoComponent implements OnInit {
     }
 
     this.addTodo.emit(todo); // propagate to parent object
+    this.title = null;
   }
 
 }

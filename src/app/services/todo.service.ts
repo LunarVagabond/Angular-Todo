@@ -14,48 +14,27 @@ const httpOptions = {
 })
 export class TodoService {
 
-  todosUrl: string = "https://jsonplaceholder.typecode.com/todos";
+  todosUrl: string = "http://localhost:3000";
   todosLimit = '?_limit=5';
 
   constructor(private http: HttpClient) { }
 
-  futureGetTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
+  getTodos(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.todosUrl}/all`);//${this.todosLimit}`);
 
   }
 
   toggleCompleted(todo: Todo): Observable<any> {
-    const url = `${this.todosUrl}/${todo.id}`;
+    const url = `${this.todosUrl}/updateStatus/${todo.todo_id}`;
     return this.http.put(url, todo, httpOptions)
   }
 
   deleteTodo(todo: Todo):Observable<Todo>{
-    const url = `${this.todosUrl}/${todo.id}`;
+    const url = `${this.todosUrl}/removeTodo/${todo.todo_id}`;
     return this.http.delete<Todo>(url,httpOptions);
   }
 
   addTodo(todo: Todo):Observable<Todo>{
-    return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
-  }
-
-  getTodos() {
-    return [
-      {
-        id: 1,
-        title: "Test 1",
-        completed: false
-      },
-      {
-        id: 2,
-        title: "Test 2",
-        desc: "This is a test description",
-        completed: false
-      },
-      {
-        id: 3,
-        title: "Test 3",
-        completed: false
-      }
-    ];
+    return this.http.post<Todo>(`${this.todosUrl}/addTodo`, todo, httpOptions);
   }
 }

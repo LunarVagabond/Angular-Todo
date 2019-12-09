@@ -12,18 +12,14 @@ export class TodoListComponent implements OnInit {
   constructor( private todoService:TodoService ) { }
 
   ngOnInit() {
-    this.todos = this.todoService.getTodos();
-    /*
-    future 
-
     this.todoService.getTodos().subscribe(todos => {
       this.todos = todos;
     })
-    */
+    
   }
   deleteTodo(todo: Todo){
     console.log('Delete me');
-    this.todos = this.todos.filter(t => t.id !== todo.id); // could go into the subscribe
+    this.todos = this.todos.filter(t => t.todo_id !== todo.todo_id); // could go into the subscribe
     this.todoService.deleteTodo(todo).subscribe();
   }
 
