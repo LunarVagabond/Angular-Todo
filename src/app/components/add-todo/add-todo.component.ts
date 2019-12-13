@@ -10,6 +10,7 @@ export class AddTodoComponent implements OnInit {
   @Output() addTodo: EventEmitter<any> = new EventEmitter()
 
   title:string;
+  description:string;
 
   constructor() { }
 
@@ -19,10 +20,12 @@ export class AddTodoComponent implements OnInit {
   onSubmit(){
     const todo = {
       title: this.title,
+      description: this.description,
       completed: false
     }
     this.addTodo.emit(todo); // propagate to parent object
     this.title = null;
+    this.description = null;
   }
 
 }

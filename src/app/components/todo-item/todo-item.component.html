@@ -1,10 +1,13 @@
-<div [ngClass]="setClass()">
-    <p>
-        <input (change)="onToggle(todo)" type="checkbox" id="{{ todo.todo_id }}" [checked]="todo.completed"/>
+<div class="card border-primary" [ngClass]="setClass()">
+    <div class="card-title">
+        <input (change)="onToggle(todo)" type="checkbox" id="{{ todo.todo_id }}" [checked]="todo.completed" />
+        <b><i><u>{{todo.title}}</u></i></b>
+        <button (click)="onDelete(todo)" class="del">x</button>
+    </div>
+    <div class="card-body">
         <label for="{{ todo.todo_id }}">
-            {{ todo.title }}
-          </label>
-        <button (click)="onDelete(todo)" class="del" >x</button>
-    </p>
-    <!-- add rest of the todo item here and create card-->
+            {{ todo.description }}
+        </label>
+    </div>
 </div>
+<!-- add rest of the todo item here and create card-->
